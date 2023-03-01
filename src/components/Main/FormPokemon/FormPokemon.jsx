@@ -8,7 +8,7 @@ function FormPokemon(props) {
   const [input, setInput] = useState('');
   const [pokemonData, setPokemonData] = useState([]);
   const [errorMessage, setErrorMessage] = useState('');
-  const [search, setSearch] = useState('');
+  const [setSearch] = useState('');
   const [debouncedInput] = useDebounce(input, 2000)
 
   useEffect(() => {
@@ -29,7 +29,9 @@ function FormPokemon(props) {
       }
     };
     getPokemonData();
-  }, [debouncedInput]);
+  }, [debouncedInput, pokemonData]);
+  
+
 
   const handleChangeInput = (event) => {
     setInput(event.target.value);

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import FormPokemon from "./FormPokemon/FormPokemon";
 import ListPokemon from "./ListPokemon/ListPokemon";
-
+import PokemonDetails from './Details/Details';
 
 
 function Main() {
@@ -15,6 +15,7 @@ function Main() {
     <div>
       <FormPokemon onSubmit={handleAddPokemon} />
       <ListPokemon searches={searches} />
+      
     </div>
   );
 }

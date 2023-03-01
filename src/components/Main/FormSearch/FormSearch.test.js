@@ -1,10 +1,10 @@
 import React from "react";
 import { shallow } from "enzyme";
-import ListPokemon from "./ListPokemon";
+import FormSearch from "./FormSearch";
 
-describe("ListPokemon", () => {
+describe("FormSearch", () => {
   test("matches snapshot", () => {
-    const wrapper = shallow(<ListPokemon />);
+    const wrapper = shallow(<FormSearch />);
     expect(wrapper).toMatchSnapshot();
   });
 });

@@ -1,0 +1,6 @@
+import { createContext } from "react";
+
+const pokemonContext = createContext();
+
+
+export { pokemonContext };

@@ -1,19 +1,26 @@
-import React from 'react';
-import CardPokemon from './CardPokemon/CardPokemon';
+
+import React, { useContext } from 'react';
+
+import { pokemonContext} from '../../../context/pokemonContext';
 
 
-function ListPokemon({ searches }) {
+
+import CardPokemon from '../ListPokemon/CardPokemon/CardPokemon'
+
+const ListPokemon = () => {
+  const {pokemons, setPokemons} = useContext(pokemonContext) //extraccion de estado y funcion globales del contex
+  
   return (
-    <div>
-      {searches.map((search, index) => (
-        <CardPokemon key={index} pokemon={search} />
-      ))}
-    </div>
-  );
+      <div>
+        { 
+          pokemons.length !== 0 ? pokemons.map((pokemon, index)=> <CardPokemon pokemon={pokemon} key={index} />) : <div>
+            <h1 >Pokemons</h1>
+          </div>
+        }
+      </div>    
+  )
 }
 
-
-
-export default ListPokemon;
+export default ListPokemon
 
 

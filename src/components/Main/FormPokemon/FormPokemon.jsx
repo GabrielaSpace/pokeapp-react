@@ -1,68 +1,65 @@
-import { useState, useEffect } from 'react';
-import { v4 as uuidv4 } from 'uuid';
-import axios from 'axios';
-import CardPokemon from '../ListPokemon/CardPokemon/CardPokemon'
+import React, {useContext} from "react";
+import { useForm } from 'react-hook-form';
+import { pokemonContext } from "../../../context/pokemonContext";
 
-function FormPokemon(props) {
-  const [input, setInput] = useState('');
-  const [pokemonData, setPokemonData] = useState([]);
-  const [errorMessage, setErrorMessage] = useState('');
-
-
-  useEffect(() => {
-    const getPokemonData = async () => {
-      if (input.trim() === '') {
-        setErrorMessage('Please, enter a name or id pokemon');
-        setPokemonData([]);
-        return;
-      }
-      try {
-        const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${input}`);
-        setPokemonData(response.data);
-      } catch (error) {
-        setErrorMessage('Pokemon not found');
-        setPokemonData([]);
-      }
-    };
-    getPokemonData();
-  }, [input]);
-
-  const handleChange = (event) => {
-    setInput(event.target.value);
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    if (Object.keys(pokemonData).length === 0) {
-      setErrorMessage('Please, enter a name or id pokemon');
-      return;
+const FormPokemon = () => {
+  const {pokemons, setPokemons} = useContext(pokemonContext) 
+  const {
+    register,
+    handleSubmit,
+    formState: { errors},
+  } = useForm({
+    mode: "onBlur",
+    criteriaMode: "all",
+    defaultValues: {
+      type: ""
     }
-    const newPokemon = {
-      id: uuidv4(),
-      name: pokemonData.name,
-      height: pokemonData.height,
-      weight: pokemonData.weight,
-      sprites: {
-        front_default: pokemonData.sprites.front_default,
-        back_default: pokemonData.sprites.back_default
-      },
-      base_experience: pokemonData.base_experience
-    }
-    setInput('');
-    setPokemonData([...pokemonData, newPokemon]); 
-  };
+  });
+
+
+
+  const sendContext = (data) =>{
+    console.log(data)
+    setPokemons([...pokemons,data])
+  }
+
   
 
   return (
-    <form className="form" onSubmit={handleSubmit}>
-      <h1>Search your pokemon</h1>
-      <input placeholder="Name or Id of the pokemon" name="text" type="text" value={input} onChange={handleChange} />
-      <button type="submit">search</button>
-      {errorMessage !== '' && <div className="alert">{errorMessage}</div>}
-      {Object.keys(pokemonData).length > 0 && <CardPokemon pokemon={pokemonData} />}
+    <div >
+    <form onSubmit={handleSubmit( data=> sendContext(data) )}  >
+      <h2>Create your Pokemon</h2>
+      <input   {...register("id", { required: true, min: 1, max: 999 })} type="number" name="id" placeholder="id"  />
+      <input  {...register("name")} type="text"  name="name" placeholder="Name" required minlenght="3"  />
+      <input  {...register("imageUrl")} type="text" name="imageUrl" placeholder="url image"required />
+      <input   {...register("height")} type="number" name="height" placeholder="Height" required/>
+      <input   {...register("weight")}  type="number" name="weight" placeholder="Weight" required/>
+
+      <select name="type" {...register("type")}>
+        <option value="bug">Bug</option>
+        <option value="dark">Dark</option>
+        <option value="dragon">Dragon</option>
+        <option value="electric">Electric</option>
+        <option value="fairy">Fairy</option>
+        <option value="fighting">Fighting</option>
+        <option value="fire">Fire</option>
+        <option value="flying">Flying</option>
+        <option value="ghost">Ghost</option>
+        <option value="grass">Grass</option>
+        <option value="ground">Ground</option>
+        <option value="ice">Ice</option>
+        <option value="normal">Normal</option>
+        <option value="poison">Poison</option>
+        <option value="psychic">Psychic</option>
+        <option value="rock">Rock</option>
+        <option value="steel">Steel</option>
+        <option value="water">Water</option>
+      </select>
+      <button type="submit">Create</button>
+     
     </form>
+    </div>
   );
 }
 
-export default FormPokemon;
-
+export default FormPokemon

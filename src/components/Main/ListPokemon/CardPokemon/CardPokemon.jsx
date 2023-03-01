@@ -8,6 +8,7 @@ function CardPokemon(props) {
       <img src={pokemon.sprites.front_default} alt={pokemon.name} />
       <img src={pokemon.sprites.back_default} alt={pokemon.name} />
       <h3>{pokemon.name.toUpperCase()}</h3>
+      <p>{pokemon.types[0].type.name}</p>
       <p>Id: {pokemon.id}</p>
       <p>Experience: {pokemon.base_experience}</p>
       <p>Height: {pokemon.height / 10} m</p>

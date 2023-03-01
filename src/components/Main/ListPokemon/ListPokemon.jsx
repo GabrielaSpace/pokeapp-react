@@ -8,8 +8,7 @@ import { pokemonContext} from '../../../context/pokemonContext';
 import CardPokemon from '../ListPokemon/CardPokemon/CardPokemon'
 
 const ListPokemon = () => {
-  const {pokemons, setPokemons} = useContext(pokemonContext) //extraccion de estado y funcion globales del contex
-  
+  const {pokemons, setPokemons} = useContext(pokemonContext) 
   return (
       <div>
         { 

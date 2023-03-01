@@ -10,6 +10,7 @@ function FormPokemon(props) {
   const [errorMessage, setErrorMessage] = useState('');
   const [setSearch] = useState('');
   const [debouncedInput] = useDebounce(input, 2000)
+  const showForm = props.showForm;
 
   useEffect(() => {
     const getPokemonData = async () => {
@@ -48,12 +49,19 @@ function FormPokemon(props) {
   };
 
   return (
-    <form className="form" onSubmit={handleSubmit}>
-      <h1>Search your pokemon</h1>
-      <input placeholder="Name or Id of the pokemon" name="name" type="text" value={input} onChange={handleChangeInput} />
-      {errorMessage !== '' && <div className="alert">{errorMessage}</div>}
-      {printList()}
-    </form>
+    
+    <div>
+       
+    {showForm ? (
+      <form className="form" onSubmit={handleSubmit}>
+        <h1>Search your pokemon</h1>
+        <input placeholder="Name or Id of the pokemon" name="name" type="text" value={input} onChange={handleChangeInput} />
+        {errorMessage !== '' && <div className="alert">{errorMessage}</div>}
+      </form>
+    ) : (
+      printList()
+    )}
+  </div>
   );
 }
 

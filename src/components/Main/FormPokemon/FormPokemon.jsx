@@ -4,6 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { useDebounce } from 'use-debounce'
 import CardPokemon from '../ListPokemon/CardPokemon/CardPokemon';
 
+
 function FormPokemon(props) {
   const [input, setInput] = useState('');
   const [pokemonData, setPokemonData] = useState([]);
@@ -25,6 +26,7 @@ function FormPokemon(props) {
       try {
         const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${debouncedInput}`);
         setPokemonData([response.data, ...pokemonData]);
+        
       } catch (error) {
         setErrorMessage('Pokemon not found');
       }
@@ -32,6 +34,9 @@ function FormPokemon(props) {
     getPokemonData();
   }, [debouncedInput, pokemonData]);
   
+/*   const addPokemon = (pokemon) => {
+    setPokemonData([pokemon, ...pokemonData]);
+  } */
 
 
   const handleChangeInput = (event) => {

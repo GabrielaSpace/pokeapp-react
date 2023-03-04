@@ -1,27 +1,26 @@
-// import { useState } from 'react';
 import FormPokemon from "./FormPokemon/FormPokemon";
-
-import React  from "react";
-import { Routes, Route } from "react-router-dom";
-import New from './New/New';
+import React, { useState } from "react";
+import { Routes, Route, useParams } from "react-router-dom";
+import New from "./New/New";
 import NotFound from './NotFound/NotFound';
+import PokemonDetails from "./Details/Details";
 
 
 function Main() {
-/*   const [searches, setSearches] = useState([]);
+  const { id } = useParams();
+  const [searches, setSearches] = useState([]);
 
   const handleAddPokemon = (newPokemon) => {
     setSearches([...searches, newPokemon]);
-  } 
-{  <FormPokemon onSubmit={handleAddPokemon} />
-      <ListPokemon searches={searches} /> } */
+  }
+
   return (
     <div>
        <Routes>
-       <Route path="/" element={<FormPokemon showForm={false} />} />
-        <Route path="/new" element={<New />} />
-        <Route path="/search" element={<FormPokemon  showForm={true} />} />
-        {/* <Route path="/pokemon/:id" element={<details/>} /> */}
+        <Route path="/" element={<FormPokemon showForm={false} />} />
+        <Route path="/new" element={<New onSubmit={handleAddPokemon} />} />
+        <Route path="/search" element={<FormPokemon showForm={true} />} />
+        <Route path="/pokemon/:id" element={<PokemonDetails id={id} />} />
         <Route path="/*" element={<NotFound />} />
       </Routes>
     </div>

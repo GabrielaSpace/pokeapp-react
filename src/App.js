@@ -1,15 +1,18 @@
 import { BrowserRouter } from 'react-router-dom';
-
-import Main from '../src/components/Main/Main'
+import Main from './components/Main/Main';
 import Header from './components/Header/Header';
+import PokemonProvider from './context/PokemonProvider';
 
 function App() {
   return (
     <div className="App">
       <h1>Pokemon</h1>
+
       <BrowserRouter>
-      <Header/>
-      < Main />
+        <PokemonProvider>
+          <Header />
+          <Main />
+        </PokemonProvider>
       </BrowserRouter>
     </div>
   );

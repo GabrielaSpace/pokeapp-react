@@ -9,6 +9,8 @@ function PokemonDetails() {
   const name = searchParams.get('name');
   const image = searchParams.get('image');
   const typeOne = searchParams.get('typeOne');
+  const typeTwo = searchParams.get('typeTwo');
+  
 
   const [pokemon, setPokemon] = useState({});
 
@@ -27,19 +29,18 @@ function PokemonDetails() {
 
   return (
     <div>
-      <img src={image} alt={name} />
-      <h3>{name.toUpperCase()}</h3>
-      <p>Id: {pokemon.id}</p>
-      <div>
-        {typeOne && (<p key={typeOne}>{typeOne.toUpperCase()} </p> )}
-        {pokemon.types && (<div> {pokemon.types.map(type => (<p key={type.type.name}>{type.type.name.toUpperCase()} </p>))}
-      </div>
-        )}
-      </div>
-      <p>Experience: {pokemon.base_experience}</p> 
-      <p>Height: {pokemon.height/10} m</p> 
-      <p>Weight: {pokemon.weight/10} Kg</p>
+    <img src={image} alt={name} />
+    <h3>{name.toUpperCase()}</h3>
+    <p>Id: {pokemon.id}</p>
+    <div>
+      {typeOne && <p>{typeOne.toUpperCase()}</p>}
+      {typeTwo && <p>{typeTwo.toUpperCase()}</p>}
     </div>
+    <p>Experience: {pokemon.base_experience}</p> 
+    <p>Height: {pokemon.height/10} m</p> 
+    <p>Weight: {pokemon.weight/10} Kg</p>
+  </div>
+  
   );
 }
 

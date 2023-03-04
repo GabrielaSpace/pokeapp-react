@@ -6,7 +6,7 @@ function CardPokemon(props) {
 
   return (
     <>
-      <Link to={`/pokemon/${pokemon.id}?name=${pokemon.name}&image=${pokemon.sprites.front_default}&typeOne=${pokemon.types[0].type.name}`} >
+      <Link to={`/pokemon/${pokemon.id}?name=${pokemon.name}&image=${pokemon.sprites.front_default}&typeOne=${pokemon.types[0].type.name}${pokemon.types.length > 1 ? `&typeTwo=${pokemon.types[1].type.name}` : ''}`} >
         <img src={pokemon.sprites.front_default} alt={pokemon.name} />
         <h3>{pokemon.name.toUpperCase()}</h3>
         <p>N°: {pokemon.id}</p>
